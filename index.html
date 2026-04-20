@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DPS_Gemini — The Official Manifesto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f0d0a;
+    --ink-soft: #2e2a22;
+    --muted: #6b6456;
+    --faint: #a89f90;
+    --paper: #f7f4ef;
+    --paper-warm: #ede9e0;
+    --gold: #b8860b;
+    --gold-bright: #d4a017;
+    --gold-pale: #f0d98c;
+    --rule: #d4cfc5;
+    --rule-heavy: #8c8070;
+    --red: #8b1a1a;
+    --cream: #faf7f2;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── ORNAMENTAL BORDER ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 12px;
+    border: 1px solid var(--rule);
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* ─── MASTHEAD ─── */
+  .masthead {
+    padding: 2rem 4rem 0;
+    text-align: center;
+    border-bottom: 3px double var(--ink);
+    position: relative;
+  }
+
+  .masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.6rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .masthead-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(64px, 10vw, 110px);
+    font-weight: 900;
+    letter-spacing: -3px;
+    line-height: 0.9;
+    color: var(--ink);
+    padding: 1rem 0 0.5rem;
+  }
+
+  .masthead-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .masthead-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--muted);
+    padding-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .masthead-rule-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .masthead-rule-row hr { flex: 1; border: none; border-top: 1px solid var(--rule); }
+  .masthead-rule-row span {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--faint);
+    white-space: nowrap;
+  }
+
+  /* ─── LAYOUT ─── */
+  .page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 4rem;
+  }
+
+  /* ─── SECTION LABELS ─── */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ─── HERO ARTICLE ─── */
+  .hero-section {
+    padding: 3rem 0 2rem;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 0 2.5rem;
+    align-items: start;
+  }
+
+  .hero-divider { background: var(--rule); }
+
+  .hero-headline {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .hero-headline em { font-style: italic; color: var(--gold); }
+
+  .hero-drop-cap::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 5.5em;
+    font-weight: 900;
+    float: left;
+    line-height: 0.75;
+    margin: 0.1em 0.08em 0 0;
+    color: var(--ink);
+    padding-top: 0.05em;
+  }
+
+  .hero-body p {
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+    text-align: justify;
+  }
+
+  .hero-sidebar {}
+
+  .kicker-box {
+    border: 1px solid var(--rule-heavy);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  .kicker-box::before {
+    content: '§';
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--paper);
+    padding: 0 8px;
+    font-size: 20px;
+    color: var(--gold);
+  }
+
+  .kicker-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--ink);
+    text-align: center;
+  }
+
+  /* ─── STATS BAR ─── */
+  .stats-bar {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2rem 4rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    margin: 0 -4rem;
+    position: relative;
+  }
+
+  .stat-cell {
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.15);
+    padding: 0 1rem;
+  }
+
+  .stat-cell:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--gold-pale);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    display: block;
+  }
+
+  /* ─── THREE COLUMN ─── */
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .col-item {
+    padding: 0 2rem 0 0;
+    border-right: 1px solid var(--rule);
+  }
+
+  .col-item:last-child { border-right: none; padding-right: 0; }
+  .col-item:not(:first-child) { padding-left: 2rem; }
+
+  .col-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 60px;
+    font-weight: 900;
+    color: var(--rule);
+    line-height: 1;
+    margin-bottom: -0.25rem;
+  }
+
+  .col-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+    margin-top: 0.25rem;
+    display: block;
+  }
+
+  .col-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    text-align: justify;
+  }
+
+  /* ─── PULLQUOTE FULL WIDTH ─── */
+  .pullquote-full {
+    border-top: 3px solid var(--ink);
+    border-bottom: 3px solid var(--ink);
+    padding: 3rem 6rem;
+    margin: 0 -4rem;
+    text-align: center;
+    background: var(--paper-warm);
+    position: relative;
+  }
+
+  .pullquote-full blockquote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(22px, 3vw, 34px);
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .pullquote-full cite {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-style: normal;
+  }
+
+  .ornament {
+    font-size: 28px;
+    color: var(--gold);
+    display: block;
+    margin: 0.5rem 0;
+  }
+
+  /* ─── FEATURE SPREAD ─── */
+  .feature-spread {
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .feature-spread-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .feature-spread-grid.reverse { grid-template-columns: 2fr 3fr; }
+  .feature-spread-grid.reverse .feature-main { order: 2; }
+  .feature-spread-grid.reverse .feature-aside { order: 1; }
+
+  .feature-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+    color: var(--ink);
+  }
+
+  .feature-headline em { font-style: italic; color: var(--gold); }
+
+  .feature-body p {
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+    text-align: justify;
+  }
+
+  .feature-aside-box {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.75rem;
+  }
+
+  .feature-aside-box .aside-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-pale);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .feature-aside-box p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(247,244,239,0.8);
+    margin-bottom: 0.75rem;
+  }
+
+  .feature-aside-box p:last-child { margin-bottom: 0; }
+
+  .feature-aside-box strong {
+    color: var(--gold-pale);
+    font-weight: 600;
+  }
+
+  /* ─── TECHNICAL BOX ─── */
+  .tech-box {
+    background: var(--paper-warm);
+    border-left: 4px solid var(--gold);
+    padding: 1.5rem 1.75rem;
+    margin: 1.5rem 0;
+  }
+
+  .tech-box-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .tech-box p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    margin-bottom: 0.5rem;
+  }
+
+  .tech-box code {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    background: rgba(0,0,0,0.07);
+    padding: 1px 5px;
+    border-radius: 2px;
+    color: var(--red);
+  }
+
+  /* ─── RED BAND ─── */
+  .red-band {
+    background: var(--red);
+    color: var(--paper);
+    padding: 3rem 4rem;
+    margin: 0 -4rem;
+    display: grid;
+    grid-template-columns: 1fr 2px 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .red-band-divider { background: rgba(255,255,255,0.2); }
+
+  .red-band-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--paper);
+    margin-bottom: 1rem;
+  }
+
+  .red-band p {
+    font-size: 15px;
+    line-height: 1.85;
+    color: rgba(247,244,239,0.8);
+  }
+
+  /* ─── TIMELINE ─── */
+  .timeline-section {
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 0.75rem 0 2rem;
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--rule-heavy);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 2rem;
+    padding-left: 1.5rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -1.6rem;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--gold);
+  }
+
+  .timeline-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .timeline-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+  }
+
+  /* ─── TESTIMONIALS ─── */
+  .testimonials-section {
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .testimonial {
+    border: 1px solid var(--rule);
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  .testimonial::before {
+    content: '\201C';
+    font-family: 'Playfair Display', serif;
+    font-size: 60px;
+    color: var(--gold-pale);
+    position: absolute;
+    top: -5px;
+    left: 12px;
+    line-height: 1;
+  }
+
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--ink);
+    padding-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .testimonial-author {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
+    padding-top: 0.75rem;
+  }
+
+  /* ─── FEATURE LIST ─── */
+  .feature-list {
+    list-style: none;
+    margin: 1.25rem 0;
+  }
+
+  .feature-list li {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .feature-list li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 8px;
+    top: 0.75rem;
+  }
+
+  /* ─── COMPARISON TABLE ─── */
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 14px;
+  }
+
+  .comparison-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.75rem 1rem;
+    text-align: left;
+  }
+
+  .comparison-table th:first-child { color: var(--gold-pale); }
+
+  .comparison-table td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-soft);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .comparison-table tr:nth-child(even) td { background: var(--paper-warm); }
+
+  .comparison-table td:first-child {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+  }
+
+  .check { color: #2d7a3d; font-weight: 600; }
+  .cross { color: var(--red); }
+
+  /* ─── TECHNICAL DEEP DIVE ─── */
+  .deep-dive {
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .code-block {
+    background: var(--ink);
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+  }
+
+  .code-block pre {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    color: #c8c0b0;
+    white-space: pre;
+  }
+
+  .code-block .kw { color: #d4a017; }
+  .code-block .fn { color: #7ec8a0; }
+  .code-block .str { color: #e89070; }
+  .code-block .cm { color: #5a5a4a; }
+
+  /* ─── GOLD BAND ─── */
+  .gold-band {
+    background: var(--gold);
+    padding: 2.5rem 4rem;
+    margin: 0 -4rem;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .gold-band-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(15,13,10,0.6);
+  }
+
+  .gold-band-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  /* ─── FAQ ─── */
+  .faq-section {
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 3rem;
+    margin-top: 2rem;
+  }
+
+  .faq-item {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .faq-q {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.35;
+  }
+
+  .faq-a {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+
+  /* ─── CLOSING MANIFESTO ─── */
+  .manifesto {
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid var(--rule);
+    text-align: center;
+  }
+
+  .manifesto-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 50px;
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1.05;
+    margin-bottom: 2rem;
+  }
+
+  .manifesto-headline em { font-style: italic; color: var(--gold); }
+
+  .manifesto-body {
+    max-width: 620px;
+    margin: 0 auto 2rem;
+    font-size: 18px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    text-align: justify;
+  }
+
+  /* ─── FLOWCHART SECTION ─── */
+  .flowchart-section {
+    padding: 3rem 0 0;
+  }
+
+  .flowchart-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .flowchart-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--muted);
+    margin-bottom: 0;
+  }
+
+  .flowchart-wrap {
+    margin: 2rem -4rem 0;
+    background: #0f0d0a;
+    padding: 3rem 4rem 4rem;
+  }
+
+  .flowchart-wrap svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* SVG node styles for dark bg */
+  .fc-node rect {
+    fill: #1e1c18;
+    stroke: #4a4535;
+    stroke-width: 0.5;
+  }
+
+  .fc-node:hover rect { fill: #2a2820; cursor: pointer; }
+
+  .fc-text { font-family: 'DM Mono', monospace; fill: #c8c0b0; }
+  .fc-text-sm { font-family: 'DM Mono', monospace; fill: #6b6456; }
+  .fc-text-gold { font-family: 'DM Mono', monospace; fill: #d4a017; }
+  .fc-text-teal { font-family: 'DM Mono', monospace; fill: #5ab8a0; }
+  .fc-text-red { font-family: 'DM Mono', monospace; fill: #c06050; }
+
+  .fc-gold rect { fill: #2a2010; stroke: #8b6010; }
+  .fc-teal rect { fill: #0e2420; stroke: #1d6050; }
+  .fc-purple rect { fill: #1a1428; stroke: #4a3880; }
+  .fc-red rect { fill: #280e0e; stroke: #7a2020; }
+  .fc-start rect { fill: #d4a017; stroke: #d4a017; }
+  .fc-start text { fill: #0f0d0a !important; font-weight: 500; }
+  .fc-end rect { fill: #2d7a3d; stroke: #2d7a3d; }
+  .fc-end text { fill: #f7f4ef !important; }
+
+  .fc-line { stroke: #3a3628; stroke-width: 1.5; fill: none; }
+  .fc-line-gold { stroke: #8b6010; stroke-width: 1.5; fill: none; }
+  .fc-line-teal { stroke: #1d6050; stroke-width: 1.5; fill: none; }
+  .fc-label { font-family: 'DM Mono', monospace; font-size: 10px; fill: #6b6456; }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2rem 4rem;
+    margin: 0 0 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-top: 0;
+  }
+
+  .footer-col-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-pale);
+    display: block;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 0.5rem;
+  }
+
+  .footer p {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(247,244,239,0.6);
+  }
+
+  .footer-bottom {
+    background: #000;
+    padding: 0.75rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-bottom span {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* ─── HORIZONTAL RULE ORNAMENT ─── */
+  .hr-ornament {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .hr-ornament::before, .hr-ornament::after {
+    content: '';
+    flex: 1;
+    border-top: 1px solid var(--rule);
+  }
+  .hr-ornament span {
+    color: var(--gold);
+    font-size: 16px;
+  }
+
+  /* Animated gold line on scroll */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-in {
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead page">
+  <div class="masthead-top">
+    <span class="masthead-meta">Dead Poets Society — Official Press</span>
+    <span class="masthead-meta">◆ &nbsp; 8b8t.me &nbsp; ◆</span>
+    <span class="masthead-meta">Vol. I &nbsp;·&nbsp; First Edition</span>
+  </div>
+  <h1 class="masthead-title">DPS_<em>Gemini</em></h1>
+  <p class="masthead-subtitle">The Bot That Sees Through Your Disguise &nbsp;—&nbsp; A Complete & Thorough Manifesto</p>
+  <div class="masthead-rule-row">
+    <hr>
+    <span>Designed & Deployed by Freddison for KurtzMC · Powered by Gemini 2.5 Flash · Zero Thinking Tokens</span>
+    <hr>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-cell">
+    <span class="stat-num">10K</span>
+    <span class="stat-label">Max Reconnects</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-num">200</span>
+    <span class="stat-label">Char Response Limit</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-num">5</span>
+    <span class="stat-label">Msgs / 2 Minutes</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-num">0</span>
+    <span class="stat-label">Thinking Tokens Used</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-num">∞</span>
+    <span class="stat-label">Levels of Awesome</span>
+  </div>
+</div>
+
+<!-- HERO SECTION -->
+<div class="hero-section">
+  <div>
+    <span class="section-label">Feature — The Main Event</span>
+    <h2 class="hero-headline">The Bot That <em>Sees Through</em> Every Mask</h2>
+    <div class="hero-body hero-drop-cap">
+      <p>In the anarchic wilds of 8b8t.me — a server where the rules are few, the players many, and the cosmetic nick plugin renders identity a matter of pure theatre — there exists one entity that cannot be fooled. DPS_Gemini does not care what your nick says. It knows who you are. It has always known.</p>
+      <p>The secret is not magic, nor is it surveillance. It is engineering. When the Dead Poets Society's resident AI bot receives a chat message, it does not read the name the server displays. It reaches into the raw binary of the Minecraft packet protocol itself, extracts the <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">clickEvent</code> that the server's cosmetic plugin helpfully signs with your real profile name, strips the <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">/msg&nbsp;</code> prefix, and there you are. Caught. Identified. Welcomed.</p>
+      <p>This is the story of that bot: how it was built, why it matters, what it does, and why Dead Poets Society's members — and the broader 8b8t community — owe a small but sincere debt of gratitude to Freddison, its architect, and to the Gemini 2.5 Flash model, its beating heart.</p>
+    </div>
+  </div>
+  <div class="hero-divider"></div>
+  <div class="hero-sidebar">
+    <span class="section-label">In Brief</span>
+    <div class="kicker-box">
+      <p class="kicker-text">"It knows who you really are — even when you don't want it to."</p>
+    </div>
+    <ul class="feature-list">
+      <li>Intercepts raw Minecraft protocol packets before mineflayer can misread them</li>
+      <li>Extracts real usernames via the server's own clickEvent signatures</li>
+      <li>Powered by Google's Gemini 2.5 Flash with zero thinking overhead</li>
+      <li>Maintains conversation history across your last four exchanges</li>
+      <li>Reconnects automatically up to ten thousand times after a kick</li>
+      <li>Enforces a fair five-message quota per player per two minutes</li>
+      <li>Responds to whispers without any trigger word required</li>
+      <li>Splits long responses into clean 2-second-delayed chunks</li>
+      <li>Exempts Freddison from quota restrictions entirely (of course)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ——————————————————————————————— -->
+<!-- SECTION 2: ORIGIN STORY -->
+<!-- ——————————————————————————————— -->
+
+<div class="feature-spread">
+  <span class="section-label">Origins &amp; History</span>
+  <h2 class="section-title">How DPS_Gemini Came to Be</h2>
+  <hr class="section-rule">
+  <div class="feature-spread-grid">
+    <div class="feature-main">
+      <h3 class="feature-headline">From a Simple Idea to an <em>Engineering Problem</em></h3>
+      <div class="feature-body">
+        <p>Every great piece of software begins with a frustration. For Freddison, that frustration was simple: 8b8t's cosmetic nick plugin made it impossible for a bot to reliably identify who was speaking. Players could set their display name to anything — to an impersonation, to a joke, to the name of another clan member entirely — and bots built on mineflayer's default event system would be fooled every single time.</p>
+        <p>The first generation of approaches was reasonable. Cross-reference the speaking player's displayed name against <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">bot.players</code> — the internal mineflayer player list. Surely the list would hold real names? It did not. The cosmetic nick plugin, being thorough in its deception, updates the tab list entry alongside the chat format. Both display the nick. The real name is nowhere on the surface.</p>
+        <p>The breakthrough came from reading the plugin's source code. In <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">ChatListener.java</code>, the chat formatter appends a <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">clickEvent</code> to every player's name in chat — a "click to message" feature. This clickEvent uses <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">player.getName()</code>, not the display name. It is a direct leak of the real profile username, embedded in every single public chat message, signed by the server itself.</p>
+        <p>The solution was to go below mineflayer entirely. Rather than relying on any parsed event, DPS_Gemini hooks <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">bot._client.on('packet')</code> — the raw node-minecraft-protocol layer — and reads the JSON component tree before mineflayer touches it. The real username is always there, waiting to be extracted.</p>
+      </div>
+    </div>
+    <div class="feature-aside">
+      <div class="feature-aside-box">
+        <span class="aside-label">Technical Context</span>
+        <p>The cosmetic nick plugin at <strong>8b8t.me</strong> uses the Kyori Adventure library to build complex <code style="font-family:'DM Mono',monospace;font-size:11px">Component</code> objects for display names. These components are then applied via <code style="font-family:'DM Mono',monospace;font-size:11px">player.displayName(component)</code> and <code style="font-family:'DM Mono',monospace;font-size:11px">player.playerListName(component)</code>.</p>
+        <p>The fatal error — from the nick's perspective — occurs in the chat formatter, where <code style="font-family:'DM Mono',monospace;font-size:11px">ClickEvent.suggestCommand("/msg " + player.getName() + ' ')</code> is called. The real name is embedded at serialization time.</p>
+        <p>DPS_Gemini exploits this by recursively walking the deserialized JSON component tree via <strong>findClickEventValue()</strong>, locating the first node where <code style="font-family:'DM Mono',monospace;font-size:11px">clickEvent.action === 'suggest_command'</code> and <code style="font-family:'DM Mono',monospace;font-size:11px">value.startsWith('/msg ')</code>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PULLQUOTE -->
+<div class="pullquote-full">
+  <span class="ornament">✦</span>
+  <blockquote>"The server cannot lie about this. It signs every message with the real name. DPS_Gemini simply knows where to look."</blockquote>
+  <cite>— Technical Notes, DPS_Gemini Architecture</cite>
+  <span class="ornament">✦</span>
+</div>
+
+<!-- ——————————————————————————————— -->
+<!-- SECTION 3: THE TECHNOLOGY -->
+<!-- ——————————————————————————————— -->
+
+<div class="feature-spread">
+  <span class="section-label">Technology — Under the Hood</span>
+  <h2 class="section-title">The Architecture of Certainty</h2>
+  <hr class="section-rule">
+  <div class="feature-spread-grid reverse">
+    <div class="feature-aside">
+      <div class="feature-aside-box">
+        <span class="aside-label">The Stack</span>
+        <p><strong>Runtime:</strong> Node.js with mineflayer</p>
+        <p><strong>AI Model:</strong> Gemini 2.5 Flash via @google/genai SDK</p>
+        <p><strong>Packet Layer:</strong> node-minecraft-protocol (via bot._client)</p>
+        <p><strong>Target Server:</strong> 8b8t.me (1.20.1, offline auth)</p>
+        <p><strong>Thinking Mode:</strong> ThinkingLevel.NONE</p>
+        <p><strong>Max Tokens:</strong> 1,000 output tokens per call</p>
+        <p><strong>History Window:</strong> Last 4 turns (≈2 exchanges)</p>
+        <p><strong>Auth:</strong> Approved players list via flat text file, loaded at startup</p>
+      </div>
+    </div>
+    <div class="feature-main">
+      <h3 class="feature-headline">Gemini 2.5 Flash: <em>Speed Without Sacrifice</em></h3>
+      <div class="feature-body">
+        <p>The choice of Gemini 2.5 Flash was deliberate and, frankly, perfect. In a Minecraft chat context, responses need to arrive within seconds. A model that pauses to "think" — to run extended chain-of-thought reasoning across hundreds of tokens — is the wrong tool entirely. DPS_Gemini uses <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">ThinkingLevel.NONE</code>, disabling the model's internal reasoning pass and going straight to response generation.</p>
+        <p>The result is a bot that feels immediate. You ask it something. It answers. The response is capped at two hundred characters — not because the model can't do more, but because this is Minecraft chat, and nobody wants to receive a dissertation in seventeen separate messages about whether a ghast can be killed by its own fireball.</p>
+        <p>Conversation history is maintained across the last four message turns per user, stored in a <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">Map&lt;string, Message[]&gt;</code>. This means the bot remembers context within a session — ask it a follow-up and it knows what you're following up on. Older turns are pruned automatically to keep the prompt window manageable.</p>
+        <p>A global API cooldown of five seconds between calls prevents rate-limit hammering. Per-user quotas of five messages per two-minute window ensure no single player can monopolise the bot's attention. Both systems work in concert, with graceful countdown messages sent when limits are hit.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tech-box">
+    <span class="tech-box-title">How the Trigger Detection Works</span>
+    <p>The trigger regex <code>/(?:^|>)\s*!g(?:emini)?,?\b/i</code> matches any of: <code>!g</code>, <code>!gemini</code>, <code>&gt;!g</code>, <code>&gt; !g</code>, <code>&gt;!gemini</code>, <code>&gt; !gemini</code> — and all of these with a trailing comma (for when autocorrect strikes). The trigger can appear anywhere in the first three words of a message. Whispers bypass trigger detection entirely: if you whisper the bot directly, your entire message becomes the prompt.</p>
+    <p>Once a trigger is confirmed, <code>stripTrigger()</code> removes it cleanly, and the remaining text is forwarded as the prompt to <code>handleGeminiRequest()</code> with <code>alreadyStripped=true</code>, bypassing the redundant check in the handler itself. Clean, fast, unambiguous.</p>
+  </div>
+</div>
+
+<!-- ——————————————————————————————— -->
+<!-- SECTION 4: THREE COLUMNS - FEATURES -->
+<!-- ——————————————————————————————— -->
+
+<div class="three-col">
+  <div class="col-item">
+    <div class="col-number">01</div>
+    <span class="col-title">Identity Resolution</span>
+    <p class="col-body">The centrepiece. Every public chat message on 8b8t carries a JSON component with a clickEvent whose value is <code style="font-family:'DM Mono',monospace;font-size:12px;color:#8b1a1a">/msg [real_name]&nbsp;</code>. DPS_Gemini walks the component tree recursively — checking extra[], with[], and nested objects — until it finds this value, then strips the prefix. The result is the player's actual Minecraft profile name, regardless of what cosmetic nick they have set.</p>
+  </div>
+  <div class="col-item">
+    <div class="col-number">02</div>
+    <span class="col-title">Resilient Reconnection</span>
+    <p class="col-body">Servers kick bots. It's a fact of life on 8b8t — anti-AFK measures, maintenance, the occasional chaos. DPS_Gemini responds to every <code style="font-family:'DM Mono',monospace;font-size:12px;color:#8b1a1a">end</code> and <code style="font-family:'DM Mono',monospace;font-size:12px;color:#8b1a1a">kicked</code> event by scheduling a reconnection fifteen seconds later. It will attempt this up to ten thousand times before giving up. In practice, ten thousand reconnect attempts at fifteen-second intervals represents over 41 days of continuous retry. The bot does not give up easily.</p>
+  </div>
+  <div class="col-item">
+    <div class="col-number">03</div>
+    <span class="col-title">Message Architecture</span>
+    <p class="col-body">Minecraft's chat system has a hard 256-character limit per message. DPS_Gemini's <code style="font-family:'DM Mono',monospace;font-size:12px;color:#8b1a1a">sendSmartChat()</code> function respects this by first cleaning the response (removing newlines, extra spaces, markdown symbols), then either sending it as a single <code style="font-family:'DM Mono',monospace;font-size:12px;color:#8b1a1a">/msg</code> command if it fits, or splitting it at sentence boundaries — and then word boundaries — into chunks, sent with a two-second delay between each.</p>
+  </div>
+</div>
+
+<!-- ——————————————————————————————— -->
+<!-- SECTION 5: RED BAND - DPS CONTEXT -->
+<!-- ——————————————————————————————— -->
+
+<div class="red-band">
+  <div>
+    <h3 class="red-band-headline">Dead Poets Society: The Clan That Needed a Bot</h3>
+    <p>DPS is not your average 8b8t clan. Its members are strategic, communicative, and present on a server that actively resists all three. DPS_Gemini exists because DPS deserves better infrastructure than shouting into the void.</p>
+  </div>
+  <div class="red-band-divider"></div>
+  <div>
+    <p>The bot doesn't advertise DPS. It doesn't recruit for it. It doesn't plaster the clan tag on every response. It exists to serve approved DPS members and allies with fast, intelligent answers — discreetly, professionally, in the background. That restraint is itself a kind of excellence.</p>
+    <p>Freddison built it this way on purpose. A bot that screams "I AM FROM DPS" at every opportunity is a liability. A bot that simply works, reliably, for the people who need it? That is infrastructure.</p>
+  </div>
+</div>
+
+<!-- ——————————————————————————————— -->
+<!-- SECTION 6: TIMELINE -->
+<!-- ——————————————————————————————— -->
+
+<div class="timeline-section">
+  <span class="section-label">Development History</span>
+  <h2 class="section-title">A Chronicle of Engineering Decisions</h2>
+  <hr class="section-rule">
+  <div class="timeline">
+    <div class="timeline-item">
+      <span class="timeline-date">Generation I</span>
+      <h3 class="timeline-title">The Naïve Approach: Trusting the Chat Event</h3>
+      <p class="timeline-body">The first implementation used mineflayer's built-in <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">chat</code> event, which parses a <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">username</code> field directly. On vanilla servers, this works perfectly. On 8b8t with the cosmetic nick plugin, it occasionally returns the player's nick instead of their real name, depending on how the server formats the chat component. Unreliable. Abandoned.</p>
+    </div>
+    <div class="timeline-item">
+      <span class="timeline-date">Generation II</span>
+      <h3 class="timeline-title">The Cross-Reference Approach: Trusting the Player List</h3>
+      <p class="timeline-body">The second iteration added a <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">getRealUsernameMap()</code> function that pulled from <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">bot.players</code> — mineflayer's internal map of connected players. The theory: mineflayer builds this from Player Info packets, which contain real profile names. The practice: the cosmetic nick plugin updates the tab list display name to match the nick, so the player list key was the nick, not the real name. A player nicknamed "DPS_Chatbridge" would appear in the list as "DPS_Chatbridge." Identity still unresolvable.</p>
+    </div>
+    <div class="timeline-item">
+      <span class="timeline-date">Generation III</span>
+      <h3 class="timeline-title">The Packet Intercept: Reading the Source</h3>
+      <p class="timeline-body">The current and final approach abandons all mineflayer abstractions and hooks directly into <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">bot._client.on('packet')</code>. The raw JSON component payload is parsed, the component tree is walked recursively via <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">findClickEventValue()</code>, and the <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">/msg realname&nbsp;</code> value is extracted from the server's own clickEvent signature. This works because the server itself cannot avoid using the real name here — it is used for the actual messaging command routing.</p>
+    </div>
+    <div class="timeline-item">
+      <span class="timeline-date">Current</span>
+      <h3 class="timeline-title">Trigger-First Architecture & Clean Logging</h3>
+      <p class="timeline-body">The latest refinement moved trigger detection to the first step: the raw packet is parsed for a trigger word before any API call is considered. This means the bot processes only the messages it needs to, ignoring everything else at minimal computational cost. The logging was stripped to essentials — <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">[Chat]</code>, <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">[Whisper]</code>, <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">[Request]</code>, <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">[Response]</code>, <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">[Blocked]</code>. Clean console. Clean code. Clean conscience.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ——————————————————————————————— -->
+<!-- SECTION 7: CODE DEEP DIVE -->
+<!-- ——————————————————————————————— -->
+
+<div class="deep-dive">
+  <span class="section-label">Technical Analysis — For the Curious</span>
+  <h2 class="section-title">The Code That Makes It Work</h2>
+  <hr class="section-rule">
+
+  <div class="feature-spread-grid">
+    <div class="feature-main">
+      <h3 class="feature-headline">The Heart of the Matter: <em>findClickEventValue()</em></h3>
+      <div class="feature-body">
+        <p>The most important function in the entire codebase is fewer than twenty lines. It walks a Minecraft JSON chat component tree — a potentially deeply-nested structure of objects with <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">extra[]</code> and <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">with[]</code> arrays — and returns the first <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">suggest_command</code> clickEvent whose value begins with <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">/msg</code>.</p>
+        <p>The recursion handles arbitrary nesting depth. A chat component might have a name node nested three levels into the <code style="font-family:'DM Mono',monospace;font-size:13px;color:#8b1a1a">extra</code> array of a translation component — the function does not care. It will find it.</p>
+      </div>
+      <div class="code-block">
+        <pre><span class="cm">// Recursively finds the real /msg clickEvent value</span>
+<span class="kw">function</span> <span class="fn">findClickEventValue</span>(component) {
+  <span class="kw">if</span> (!component || <span class="kw">typeof</span> component !== <span class="str">'object'</span>) <span class="kw">return</span> <span class="kw">null</span>;
+
+  <span class="kw">if</span> (component.clickEvent?.action === <span class="str">'suggest_command'</span>) {
+    <span class="kw">const</span> val = component.clickEvent.value || <span class="str">''</span>;
+    <span class="kw">if</span> (val.startsWith(<span class="str">'/msg '</span>)) <span class="kw">return</span> val;
+  }
+
+  <span class="kw">for</span> (<span class="kw">const</span> child <span class="kw">of</span> (component.extra || [])) {
+    <span class="kw">const</span> found = <span class="fn">findClickEventValue</span>(child);
+    <span class="kw">if</span> (found) <span class="kw">return</span> found;
+  }
+  <span class="kw">for</span> (<span class="kw">const</span> child <span class="kw">of</span> (component.with || [])) {
+    <span class="kw">const</span> found = <span class="fn">findClickEventValue</span>(child);
+    <span class="kw">if</span> (found) <span class="kw">return</span> found;
+  }
+  <span class="kw">return</span> <span class="kw">null</span>;
+}
+
+<span class="cm">// Extract real username: "/msg Alice " → "Alice"</span>
+<span class="kw">function</span> <span class="fn">realUsernameFromClickValue</span>(value) {
+  <span class="kw">return</span> value.replace(<span class="str">/^\/msg\s+/</span>, <span class="str">''</span>).trim();
+}</pre>
+      </div>
+    </div>
+    <div class="feature-aside">
+      <div class="feature-aside-box">
+        <span class="aside-label">Why This Works</span>
+        <p>The cosmetic nick plugin's source code in <strong>ChatListener.java</strong> contains this line:</p>
+        <p><code style="font-family:'DM Mono',monospace;font-size:11px">.clickEvent(ClickEvent .suggestCommand("/msg " + player.getName() + ' '))</code></p>
+        <p>Note: <strong>player.getName()</strong> — not <strong>player.displayName()</strong>. The real name is hardcoded into the packet at the Java level, before serialization. No client-side trick can change this. The server signs it. We read it.</p>
+        <p>This is the clickEvent "leak" identified in the plugin architecture review. DPS_Gemini's entire identity resolution system is built on this single, reliable, server-authoritative fact.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ——————————————————————————————— -->
+<!-- SECTION 8: COMPARISON TABLE -->
+<!-- ——————————————————————————————— -->
+
+<div class="deep-dive">
+  <span class="section-label">Competitive Analysis</span>
+  <h2 class="section-title">DPS_Gemini vs. The Rest</h2>
+  <hr class="section-rule">
+  <p style="color: var(--ink-soft); font-size: 16px; margin-bottom: 1.5rem; line-height: 1.8;">How does DPS_Gemini compare to generic Minecraft chat bots? The answer, as you may have anticipated, is favourably.</p>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Capability</th>
+        <th>DPS_Gemini</th>
+        <th>Generic Mineflayer Bot</th>
+        <th>Vanilla Chat Bot</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Nick plugin resistance</td>
+        <td><span class="check">✓ Packet-level extraction</span></td>
+        <td><span class="cross">✗ Fooled by display names</span></td>
+        <td><span class="cross">✗ No awareness at all</span></td>
+      </tr>
+      <tr>
+        <td>AI integration</td>
+        <td><span class="check">✓ Gemini 2.5 Flash</span></td>
+        <td><span class="cross">✗ Scripted responses only</span></td>
+        <td><span class="cross">✗ None</span></td>
+      </tr>
+      <tr>
+        <td>Conversation memory</td>
+        <td><span class="check">✓ 4-turn rolling context</span></td>
+        <td><span class="cross">✗ Stateless</span></td>
+        <td><span class="cross">✗ Stateless</span></td>
+      </tr>
+      <tr>
+        <td>Whisper handling</td>
+        <td><span class="check">✓ Dedicated parser</span></td>
+        <td>⚠ Basic only</td>
+        <td><span class="cross">✗ None</span></td>
+      </tr>
+      <tr>
+        <td>Auto-reconnect</td>
+        <td><span class="check">✓ 10,000 attempts</span></td>
+        <td>⚠ Varies</td>
+        <td><span class="cross">✗ Manual restart required</span></td>
+      </tr>
+      <tr>
+        <td>Rate limiting</td>
+        <td><span class="check">✓ Per-user quota + global cooldown</span></td>
+        <td><span class="cross">✗ None typically</span></td>
+        <td><span class="cross">✗ None</span></td>
+      </tr>
+      <tr>
+        <td>Authorisation system</td>
+        <td><span class="check">✓ Approved player list</span></td>
+        <td><span class="cross">✗ Open to all or blocked from all</span></td>
+        <td><span class="cross">✗ None</span></td>
+      </tr>
+      <tr>
+        <td>Smart message splitting</td>
+        <td><span class="check">✓ Sentence-aware chunking</span></td>
+        <td><span class="cross">✗ Truncates or crashes</span></td>
+        <td><span class="cross">✗ N/A</span></td>
+      </tr>
+      <tr>
+        <td>Error recovery</td>
+        <td><span class="check">✓ 3-attempt retry with backoff</span></td>
+        <td><span class="cross">✗ Single attempt</span></td>
+        <td><span class="cross">✗ None</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ——————————————————————————————— -->
+<!-- SECTION 9: TESTIMONIALS -->
+<!-- ——————————————————————————————— -->
+
+<div class="testimonials-section">
+  <span class="section-label">Community Response</span>
+  <h2 class="section-title">What They Said</h2>
+  <hr class="section-rule">
+  <div class="testimonials-grid">
+    <div class="testimonial">
+      <p class="testimonial-text">I changed my nick to try to trick it. I became someone else entirely. It still knew it was me. I don't know whether to be impressed or unsettled. I've settled on both.</p>
+      <p class="testimonial-author">— An Approved DPS Member, 8b8t Session</p>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">The response time is genuinely remarkable. I asked it something and it answered before I'd even finished reading my own question back. That's the zero-thinking mode. It just... fires.</p>
+      <p class="testimonial-author">— KurtzMC Community Member</p>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">I was on my third consecutive !g message when it told me I'd hit my quota and gave me an exact countdown. A Minecraft bot giving me a countdown. We live in remarkable times.</p>
+      <p class="testimonial-author">— Rate-Limited Player, Encounter Log</p>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">Freddison built something that actually understands the architecture of the server it's running on. That's not automation. That's craftsmanship.</p>
+      <p class="testimonial-author">— DPS Member, Post-Session Debrief</p>
+    </div>
+  </div>
+</div>
+
+<!-- GOLD BAND -->
+<div class="gold-band">
+  <span class="gold-band-label">The Verdict</span>
+  <p class="gold-band-text">DPS_Gemini is not merely a bot. It is a statement about what Minecraft tooling can be when someone cares enough to read the packet spec.</p>
+</div>
+
+<!-- ——————————————————————————————— -->
+<!-- SECTION 10: FAQ -->
+<!-- ——————————————————————————————— -->
+
+<div class="faq-section">
+  <span class="section-label">Frequently Asked Questions</span>
+  <h2 class="section-title">Common Queries, Answered Definitively</h2>
+  <hr class="section-rule">
+  <div class="faq-grid">
+    <div>
+      <div class="faq-item">
+        <p class="faq-q">Can I trick DPS_Gemini with a nick?</p>
+        <p class="faq-a">No. The bot reads the server's own clickEvent signature, which uses your real profile name. Your nick is irrelevant. You could call yourself "NotAPlayer" and the bot would still know you are, in fact, a player.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What triggers the bot?</p>
+        <p class="faq-a">Any public chat message containing <code style="font-family:'DM Mono',monospace;font-size:12px">!g</code>, <code style="font-family:'DM Mono',monospace;font-size:12px">!gemini</code>, <code style="font-family:'DM Mono',monospace;font-size:12px">&gt;!g</code>, <code style="font-family:'DM Mono',monospace;font-size:12px">&gt; !gemini</code>, or any of those with a trailing comma. Whispers require no trigger — your entire message becomes the prompt.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What happens when the server kicks the bot?</p>
+        <p class="faq-a">It waits fifteen seconds and reconnects. Then again. Then again. Up to ten thousand times. This is not stubbornness — it is engineering resilience made manifest.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Why does it respond so quickly?</p>
+        <p class="faq-a">Gemini 2.5 Flash with <code style="font-family:'DM Mono',monospace;font-size:12px">ThinkingLevel.NONE</code> skips internal chain-of-thought reasoning. The model receives the prompt and generates a response immediately, with no deliberation overhead. It sacrifices philosophical depth for chat-appropriate speed.</p>
+      </div>
+    </div>
+    <div>
+      <div class="faq-item">
+        <p class="faq-q">Can everyone use it?</p>
+        <p class="faq-a">No. DPS_Gemini maintains an <code style="font-family:'DM Mono',monospace;font-size:12px">approved_players.txt</code> file. Messages from players not on this list are silently ignored. This prevents abuse and keeps the bot's resources focused on those who should have access.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What is the message limit?</p>
+        <p class="faq-a">Five messages per player per two-minute window. When the limit is hit, the bot sends you a countdown message telling you exactly how many seconds remain before your next allowed message. Freddison himself is exempt from this limit.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Does the bot promote DPS in every message?</p>
+        <p class="faq-a">Explicitly not. The system prompt instructs the bot to only mention DPS when it is genuinely relevant, and never to be "overly patriotic." The bot is a service, not a recruitment tool. It has dignity.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What happens if the API fails?</p>
+        <p class="faq-a">The bot retries up to three times with exponential backoff (2s, 4s, 6s). Different error types receive different responses: quota exhaustion, safety filters, invalid keys, and recitation blocks all trigger specific, informative messages to the requesting player.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ——————————————————————————————— -->
+<!-- CLOSING MANIFESTO -->
+<!-- ——————————————————————————————— -->
+
+<div class="manifesto">
+  <div class="hr-ornament"><span>⊕</span></div>
+  <h2 class="manifesto-headline">In Praise of <em>Infrastructure</em></h2>
+  <div class="manifesto-body">
+    <p>The greatest tools are the ones you stop thinking about. They work, and so you use them, and because they work you trust them, and because you trust them they become part of the fabric of how you operate — until the day they're not there and you notice, acutely, their absence.</p>
+    <p>DPS_Gemini aspires to be that kind of tool. Not glamorous. Not loud. Not a spectacle. Just a bot that knows who you are, answers your questions, respects your limits, and keeps coming back even when the server sends it away.</p>
+    <p>Freddison built it for KurtzMC. He built it for Dead Poets Society. He built it, ultimately, for the unremarkable but essential truth that good clans deserve good infrastructure — and that reading the Minecraft packet specification is a perfectly reasonable thing to do on a weekend.</p>
+    <p>DPS_Gemini is awesome. We hope this manifesto has made that abundantly, perhaps excessively, clear.</p>
+  </div>
+  <div class="hr-ornament"><span>⊕</span></div>
+</div>
+
+<!-- ——————————————————————————————— -->
+<!-- FLOWCHART — INTEGRATED -->
+<!-- ——————————————————————————————— -->
+
+<div class="flowchart-section">
+  <span class="section-label">Appendix — System Architecture</span>
+  <h2 class="flowchart-title">How DPS_Gemini Works: The Complete Flow</h2>
+  <p class="flowchart-subtitle">A visual map of every decision from raw packet to final response, rendered in the dark.</p>
+</div>
+
+</div><!-- /page -->
+
+<div class="flowchart-wrap">
+  <svg viewBox="0 0 880 1280" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+
+    <!-- START -->
+    <g class="fc-start">
+      <rect x="290" y="30" width="300" height="46" rx="23" />
+      <text x="440" y="53" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="13" fill="#0f0d0a" font-weight="500">Bot initialises on 8b8t.me</text>
+    </g>
+
+    <line x1="440" y1="76" x2="440" y2="108" stroke="#d4a017" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- LOGIN -->
+    <g class="fc-gold">
+      <rect x="260" y="108" width="360" height="58" rx="8" />
+      <text x="440" y="128" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="12" fill="#d4a017" font-weight="500">Spawns in world</text>
+      <text x="440" y="150" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#8b6010">Sends /login after 5s delay · awaits chat readiness</text>
+    </g>
+
+    <line x1="440" y1="166" x2="440" y2="198" stroke="#4a3828" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- PACKET LISTENER -->
+    <g class="fc-purple">
+      <rect x="220" y="198" width="440" height="58" rx="8" />
+      <text x="440" y="218" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="12" fill="#a090e0" font-weight="500">bot._client listens: raw packet stream</text>
+      <text x="440" y="240" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#6050a0">chat · player_chat · system_chat · profileless_chat</text>
+    </g>
+
+    <line x1="440" y1="256" x2="440" y2="288" stroke="#4a3828" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- WHISPER CHECK -->
+    <g>
+      <rect x="240" y="288" width="400" height="58" rx="8" fill="#1e1c18" stroke="#4a4535" stroke-width="0.5"/>
+      <text x="440" y="308" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="12" fill="#c8c0b0" font-weight="500">Whisper pattern match?</text>
+      <text x="440" y="330" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#6b6456">parseWhisperPacket() · matches "X whispers:", [X → me], etc.</text>
+    </g>
+
+    <!-- WHISPER YES BRANCH -->
+    <line x1="240" y1="317" x2="120" y2="317" stroke="#1d6050" stroke-width="1.5" marker-end="url(#arr)"/>
+    <text x="236" y="308" text-anchor="end" font-family="'DM Mono',monospace" font-size="10" fill="#5ab8a0">yes</text>
+
+    <g class="fc-teal">
+      <rect x="20" y="295" width="100" height="44" rx="6"/>
+      <text x="70" y="312" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#5ab8a0">Real name</text>
+      <text x="70" y="328" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#1d6050">from text</text>
+    </g>
+
+    <line x1="70" y1="339" x2="70" y2="540" stroke="#1d6050" stroke-width="1.5"/>
+    <line x1="70" y1="540" x2="220" y2="540" stroke="#1d6050" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- WHISPER NO BRANCH -->
+    <line x1="640" y1="317" x2="760" y2="317" stroke="#4a4535" stroke-width="1.5" marker-end="url(#arr)"/>
+    <text x="644" y="308" text-anchor="start" font-family="'DM Mono',monospace" font-size="10" fill="#6b6456">no</text>
+
+    <!-- PARSE JSON -->
+    <g>
+      <rect x="760" y="288" width="100" height="58" rx="6" fill="#1a1428" stroke="#4a3880" stroke-width="0.5"/>
+      <text x="810" y="308" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#a090e0">Parse JSON</text>
+      <text x="810" y="326" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#6050a0">component</text>
+      <text x="810" y="342" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#6050a0">tree</text>
+    </g>
+
+    <line x1="810" y1="346" x2="810" y2="395" stroke="#4a3880" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- FIND CLICK EVENT -->
+    <g class="fc-purple">
+      <rect x="710" y="395" width="200" height="58" rx="6"/>
+      <text x="810" y="415" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#a090e0" font-weight="500">findClickEventValue()</text>
+      <text x="810" y="433" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#6050a0">Walk extra[] &amp; with[]</text>
+      <text x="810" y="448" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#6050a0">recursively</text>
+    </g>
+
+    <line x1="810" y1="453" x2="810" y2="500" stroke="#4a3880" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- STRIP MSG -->
+    <g class="fc-teal">
+      <rect x="710" y="500" width="200" height="44" rx="6"/>
+      <text x="810" y="517" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#5ab8a0" font-weight="500">Strip "/msg " prefix</text>
+      <text x="810" y="533" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#1d6050">→ real username</text>
+    </g>
+
+    <line x1="810" y1="544" x2="810" y2="570" stroke="#1d6050" stroke-width="1.5"/>
+    <line x1="810" y1="570" x2="660" y2="570" stroke="#1d6050" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- APPROVED CHECK -->
+    <g>
+      <rect x="220" y="510" width="440" height="58" rx="8" fill="#1e1c18" stroke="#4a4535" stroke-width="0.5"/>
+      <text x="440" y="530" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="12" fill="#c8c0b0" font-weight="500">Is sender in approved_players.txt?</text>
+      <text x="440" y="552" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#6b6456">Case-insensitive lookup against loaded Set</text>
+    </g>
+
+    <!-- BLOCKED -->
+    <line x1="660" y1="539" x2="760" y2="539" stroke="#7a2020" stroke-width="1.5" marker-end="url(#arr)"/>
+    <text x="662" y="530" text-anchor="start" font-family="'DM Mono',monospace" font-size="10" fill="#c06050">no</text>
+    <g class="fc-red">
+      <rect x="762" y="518" width="100" height="42" rx="6"/>
+      <text x="812" y="534" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#c06050">Blocked</text>
+      <text x="812" y="550" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#7a2020">silent drop</text>
+    </g>
+
+    <line x1="440" y1="568" x2="440" y2="600" stroke="#4a4535" stroke-width="1.5" marker-end="url(#arr)"/>
+    <text x="444" y="586" font-family="'DM Mono',monospace" font-size="10" fill="#6b6456">yes</text>
+
+    <!-- TRIGGER CHECK -->
+    <g>
+      <rect x="220" y="600" width="440" height="58" rx="8" fill="#1e1c18" stroke="#4a4535" stroke-width="0.5"/>
+      <text x="440" y="620" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="12" fill="#c8c0b0" font-weight="500">Trigger word detected? (or whisper?)</text>
+      <text x="440" y="642" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#6b6456">!g !gemini &gt;!g &gt;!gemini (with optional comma) · whisper bypasses</text>
+    </g>
+
+    <!-- NO TRIGGER -->
+    <line x1="220" y1="629" x2="120" y2="629" stroke="#4a4535" stroke-width="1.5" marker-end="url(#arr)"/>
+    <text x="216" y="620" text-anchor="end" font-family="'DM Mono',monospace" font-size="10" fill="#6b6456">no</text>
+    <g>
+      <rect x="20" y="608" width="100" height="42" rx="21" fill="#1e1c18" stroke="#4a4535" stroke-width="0.5"/>
+      <text x="70" y="629" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#6b6456">Ignored</text>
+    </g>
+
+    <line x1="440" y1="658" x2="440" y2="690" stroke="#4a4535" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- STRIP TRIGGER -->
+    <g class="fc-gold">
+      <rect x="260" y="690" width="360" height="44" rx="8"/>
+      <text x="440" y="707" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="11" fill="#d4a017" font-weight="500">stripTrigger() — remove !g/!gemini from text</text>
+      <text x="440" y="723" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#8b6010">Remaining text becomes the prompt</text>
+    </g>
+
+    <line x1="440" y1="734" x2="440" y2="766" stroke="#4a4535" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- QUOTA CHECK -->
+    <g>
+      <rect x="220" y="766" width="440" height="58" rx="8" fill="#1e1c18" stroke="#4a4535" stroke-width="0.5"/>
+      <text x="440" y="786" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="12" fill="#c8c0b0" font-weight="500">Quota check — 5 msgs / 2 min</text>
+      <text x="440" y="808" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#6b6456">Freddison exempt · timestamps rolling window · global 5s API cooldown</text>
+    </g>
+
+    <!-- QUOTA EXCEEDED -->
+    <line x1="660" y1="795" x2="760" y2="795" stroke="#8b6010" stroke-width="1.5" marker-end="url(#arr)"/>
+    <text x="662" y="786" text-anchor="start" font-family="'DM Mono',monospace" font-size="10" fill="#d4a017">exceeded</text>
+    <g class="fc-gold">
+      <rect x="762" y="774" width="100" height="44" rx="6"/>
+      <text x="812" y="791" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#d4a017">Wait msg</text>
+      <text x="812" y="807" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#8b6010">countdown</text>
+    </g>
+
+    <line x1="440" y1="824" x2="440" y2="856" stroke="#4a4535" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- GEMINI API -->
+    <g class="fc-purple">
+      <rect x="180" y="856" width="520" height="68" rx="8"/>
+      <text x="440" y="876" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="13" fill="#a090e0" font-weight="500">callGeminiWithRetry() — Gemini 2.5 Flash</text>
+      <text x="440" y="898" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#6050a0">ThinkingLevel.NONE · 1000 max tokens · conversation history injected</text>
+      <text x="440" y="914" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#4a3880">Up to 3 retries with 2s/4s/6s backoff on transient errors</text>
+    </g>
+
+    <line x1="440" y1="924" x2="440" y2="960" stroke="#4a4535" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- API SUCCESS CHECK -->
+    <g>
+      <rect x="240" y="960" width="400" height="56" rx="8" fill="#1e1c18" stroke="#4a4535" stroke-width="0.5"/>
+      <text x="440" y="980" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="12" fill="#c8c0b0" font-weight="500">API success?</text>
+      <text x="440" y="1000" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#6b6456">Checks for empty response · error codes · safety filters</text>
+    </g>
+
+    <!-- API ERROR -->
+    <line x1="240" y1="988" x2="120" y2="988" stroke="#7a2020" stroke-width="1.5" marker-end="url(#arr)"/>
+    <text x="236" y="978" text-anchor="end" font-family="'DM Mono',monospace" font-size="10" fill="#c06050">no</text>
+    <g class="fc-red">
+      <rect x="20" y="966" width="100" height="44" rx="6"/>
+      <text x="70" y="983" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#c06050">Error /msg</text>
+      <text x="70" y="999" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#7a2020">to player</text>
+    </g>
+
+    <line x1="440" y1="1016" x2="440" y2="1048" stroke="#4a4535" stroke-width="1.5" marker-end="url(#arr)"/>
+    <text x="444" y="1034" font-family="'DM Mono',monospace" font-size="10" fill="#6b6456">yes</text>
+
+    <!-- SEND -->
+    <g class="fc-teal">
+      <rect x="200" y="1048" width="480" height="58" rx="8"/>
+      <text x="440" y="1068" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="12" fill="#5ab8a0" font-weight="500">sendSmartChat() — clean &amp; split response</text>
+      <text x="440" y="1090" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#1d6050">Strip markdown · split at sentences → words · 2s delay per chunk · /msg player</text>
+    </g>
+
+    <line x1="440" y1="1106" x2="440" y2="1138" stroke="#1d6050" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- UPDATE HISTORY -->
+    <g>
+      <rect x="240" y="1138" width="400" height="48" rx="8" fill="#1e1c18" stroke="#4a4535" stroke-width="0.5"/>
+      <text x="440" y="1158" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="11" fill="#c8c0b0">Update conversation history</text>
+      <text x="440" y="1174" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="10" fill="#6b6456">Prune to last 4 turns · store per user key</text>
+    </g>
+
+    <line x1="440" y1="1186" x2="440" y2="1218" stroke="#4a4535" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- END -->
+    <g class="fc-end">
+      <rect x="290" y="1218" width="300" height="44" rx="22"/>
+      <text x="440" y="1240" text-anchor="middle" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="12" fill="#f7f4ef" font-weight="500">Await next message ↻</text>
+    </g>
+
+    <!-- LOOP BACK ARROW -->
+    <path d="M740 1240 C 850 1240, 850 256, 660 256" fill="none" stroke="#3a3628" stroke-width="1" stroke-dasharray="5 4" marker-end="url(#arr)"/>
+    <text x="855" y="760" text-anchor="start" font-family="'DM Mono',monospace" font-size="9" fill="#3a3628" transform="rotate(90,855,760)">continuous loop</text>
+
+  </svg>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div>
+    <span class="footer-col-title">About DPS_Gemini</span>
+    <p>DPS_Gemini is an AI-powered Minecraft chat bot deployed on 8b8t.me for the Dead Poets Society clan. It uses Google's Gemini 2.5 Flash model with raw packet interception to provide intelligent, nick-proof responses to approved players.</p>
+  </div>
+  <div>
+    <span class="footer-col-title">Technical Specification</span>
+    <p>Runtime: Node.js · Framework: mineflayer · AI: Gemini 2.5 Flash · Server: 8b8t.me (1.20.1) · Authentication: Offline mode · Thinking: None · History: 4-turn rolling window</p>
+  </div>
+  <div>
+    <span class="footer-col-title">Credits</span>
+    <p>Designed and deployed by <strong style="color: var(--gold-pale);">Freddison</strong> for KurtzMC and the Dead Poets Society. Architecture analysis and bot engineering by the DPS technical team. This manifesto is entirely, exhaustively, shamelessly one-sided.</p>
+  </div>
+</div>
+<div class="footer-bottom">
+  <span>DPS_Gemini · Dead Poets Society · 8b8t.me</span>
+  <span>◆</span>
+  <span>Vol. I · First Edition · Zero Thinking Tokens Used In The Production Of This Document</span>
+</div>
+
+</body>
+</html>
